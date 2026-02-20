@@ -1,6 +1,10 @@
 class ListsController < ApplicationController
   def index
-    @lists = List.all
+    if params[:search].present?
+      @lists = List.where("name ILIKE ?", "%#{params[:search]}%")
+    else
+      @lists = List.all
+    end
   end
 
   def new
@@ -19,6 +23,14 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
+    @movie_ratings = @list.movies.order(rating: :desc).first(3)
+  end
+
+  def destroy
+    @list = List.find(params[:id])
+    @list.destroy
+
+    redirect_to lists_path, status: :see_other
   end
 
   private

@@ -1,5 +1,5 @@
 <%= simple_form_for [list, bookmark] do |f| %>
-  <%= f.input :comment %>
-  <%= f.association :movie %>
-  <%= f.submit class: "btn btn-primary mt-4" %>
+  <%= f.input :comment, input_html: { class: "bg-white" } %>
+  <%= f.association :movie, collection: @movies, input_html: { class: "bg-white" } %>
+  <%= f.submit class: "btn btn-danger border-black" %>
 <% end %>

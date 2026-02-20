@@ -1,18 +1,28 @@
-<div class="container my-3">
+<div class="container">
   <h1>Lists</h1>
-  <div class="row justify-content-start g-2">
+  <div class="row justify-content-start gx-4 gy-3">
     <% @lists.each do |list| %>
       <div class="col-12 col-sm-6 col-lg-4">
-        <div class="card rounded-5 bg-info">
-          <div class="card-category card-img-top rounded-bottom rounded-5" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= list.photo.attached? ? cl_image_path(list.photo.key) : 'https://adjameson.wordpress.com/wp-content/uploads/2019/06/marvel-vs-dc.jpg' %>)"></div>
-          <div class="card-body">
-            <h3 class="card-text"><%= link_to list.name, list_path(list) %></li></h3>
+        <%= link_to list_path(list) do %>
+          <% photo = nil %>
+          <% if list.photo.attached?
+            photo = cl_image_path(list.photo.key)
+          elsif list.movies.first
+            photo = list.movies.first.poster_url
+          else
+            photo = 'https://adjameson.wordpress.com/wp-content/uploads/2019/06/marvel-vs-dc.jpg'
+          end %>
+          <div class="card rounded-5 bg-secondary">
+            <div class="card-category card-img-top rounded-bottom rounded-5" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= photo %>)"></div>
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <h3 class="card-text m-0"><%= list.name %></li></h3><%= link_to list_path(list), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %><i class="fa-regular fa-trash-can"></i><% end %>
+              </div>
+              <p class="m-0"><%= list.movies.count %> movies</p>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
     <% end %>
   </div>
 </div>
-
-<%#   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://adjameson.wordpress.com/wp-content/uploads/2019/06/marvel-vs-dc.jpg');
- %>

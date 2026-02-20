@@ -24,7 +24,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+    <nav class="navbar navbar-expand-lg bg-black border-bottom">
       <div class="container-fluid">
         <%= link_to lists_path do %>
           <%= image_tag "https://png.pngtree.com/png-clipart/20221006/ourmid/pngtree-popcorn-logo-png-image_6287125.png", width: 80 %>
@@ -35,29 +35,54 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <%= link_to "Home", lists_path, class: "nav-link active text-decoration-none" %>
+              <%= link_to "Home", lists_path, class: "nav-link active text-decoration-none text-white" %>
             </li>
             <li class="nav-item">
-              <%= link_to "Create List", new_list_path, class: "nav-link active text-decoration-none" %>
+              <%= link_to "Create List", new_list_path, class: "nav-link active text-decoration-none text-white" %>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle text-white" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Lists
               </a>
               <ul class="dropdown-menu">
                 <% List.all.each do |list| %>
-                  <li><div class="dropdown-item"><%= link_to list.name, list_path(list), class: "nav-link active text-decoration-none" %></div></li>
+                  <li><div class="dropdown-item d-flex justify-content-between align-items-center"><div><%= link_to list.name, list_path(list), class: "nav-link active text-decoration-none" %></div><div>(<%= list.movies.count %>)</div></div></li>
                 <% end %>
               </ul>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-            <button class="btn btn-outline-primary" type="submit">Search</button>
-          </form>
+          <%= simple_form_for :search, url: root_path, method: :get do |f| %>
+            <div class="d-flex align-items-center search-form-control form-group">
+              <input class="form-control string required" type="text" name="search" id="search_query" value="<%= params[:search] %>"/>
+              <button name="button" type="submit" class="btn btn-danger">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          <% end %>
         </div>
       </div>
     </nav>
-    <%= yield %>
+
+    <div class="min-vh-100 py-3">
+      <%= yield %>
+    </div>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center p-3 mt-4 border-top bg-black">
+      <p class="col-md-4 mb-0 text-white">© 2025 Company, Inc</p>
+      <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" aria-label="Bootstrap">
+        <svg class="bi me-2" width="40" height="32" aria-hidden="true">
+          <%= link_to lists_path do %>
+            <%= image_tag "https://png.pngtree.com/png-clipart/20221006/ourmid/pngtree-popcorn-logo-png-image_6287125.png", width: 80 %>
+          <% end %>
+        </svg>
+      </a>
+        <ul class="nav col-md-4 justify-content-end">
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Home</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Features</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-white">About</a></li>
+        </ul>
+    </footer>
   </body>
 </html>
