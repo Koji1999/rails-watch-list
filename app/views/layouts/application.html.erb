@@ -37,13 +37,17 @@
             <li class="nav-item">
               <%= link_to "Home", lists_path, class: "nav-link active text-decoration-none" %>
             </li>
+            <li class="nav-item">
+              <%= link_to "Create List", new_list_path, class: "nav-link active text-decoration-none" %>
+            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                View
+                Lists
               </a>
               <ul class="dropdown-menu">
-                <li><div class="dropdown-item"><%= link_to "Create List", new_list_path, class: "nav-link active text-decoration-none" %></div></li>
-                <li><div class="dropdown-item"><%= link_to "Location", new_list_path, class: "nav-link active text-decoration-none" %></div></li>
+                <% List.all.each do |list| %>
+                  <li><div class="dropdown-item"><%= link_to list.name, list_path(list), class: "nav-link active text-decoration-none" %></div></li>
+                <% end %>
               </ul>
             </li>
           </ul>
