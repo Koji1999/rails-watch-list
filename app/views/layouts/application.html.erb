@@ -52,9 +52,9 @@
             </li>
           </ul>
           <%= simple_form_for :search, url: root_path, method: :get do |f| %>
-            <div class="d-flex align-items-center search-form-control form-group">
+            <div class="d-flex align-items-center search-form-control form-group input-group">
               <input class="form-control string required" type="text" name="search" id="search_query" value="<%= params[:search] %>"/>
-              <button name="button" type="submit" class="btn btn-danger ms-2">
+              <button name="button" type="submit" class="btn btn-danger border-start">
                 <i class="fas fa-search"></i>
               </button>
             </div>
