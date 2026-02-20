@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6 col-offset-3">
+      <h1 class="mt-2"><%= @list.name %></h1>
+      <% @list.bookmarks.each do |bookmark| %>
+        <div class="card mb-3 bg-danger" style="max-width: 540px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="<%= bookmark.movie.poster_url %>" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= bookmark.movie.title %></h5>
+                <p class="card-text"><%= bookmark.comment %></p>
+                <p><i class="fa-regular fa-trash-can"></i> <%= link_to "Remove", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= link_to "create", new_list_bookmark_path(@list) %>

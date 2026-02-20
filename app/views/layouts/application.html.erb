@@ -24,6 +24,34 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+      <div class="container-fluid">
+        <%= image_tag "https://png.pngtree.com/png-clipart/20221006/ourmid/pngtree-popcorn-logo-png-image_6287125.png", width: 80 %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <%= link_to "Home", lists_path, class: "nav-link active text-decoration-none" %>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                View
+              </a>
+              <ul class="dropdown-menu">
+                <li><div class="dropdown-item"><%= link_to "Create List", new_list_path, class: "nav-link active text-decoration-none" %></div></li>
+                <li><div class="dropdown-item"><%= link_to "Location", new_list_path, class: "nav-link active text-decoration-none" %></div></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>

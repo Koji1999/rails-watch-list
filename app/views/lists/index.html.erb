@@ -1,0 +1,15 @@
+<div class="container my-3">
+  <h1>Lists</h1>
+  <div class="row justify-content-between g-2">
+    <% @lists.each do |list| %>
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="card rounded-5 bg-info">
+          <div class="card-img-top rounded-bottom rounded-5"></div>
+          <div class="card-body">
+            <h3 class="card-text"><%= link_to list.name, list_path(list) %></li></h3>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
